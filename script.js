@@ -160,13 +160,15 @@ const autoplayIntervals = {
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Initialize Sticky Header scroll trigger
     const header = document.querySelector('.main-header');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
+    if (header) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    }
 
     // 2. Render all carousels
     initCarousel('phone', 'phone-track');
@@ -286,9 +288,38 @@ function updateSlideText(type, index) {
     detailsContainer.style.transition = 'opacity 0.25s ease';
     detailsContainer.style.opacity = '0';
 
+    // Also update mobile-only panel for phone carousel
+    const mobilePanel = type === 'phone' ? document.getElementById('phone-mobile-details') : null;
+    if (mobilePanel) {
+        mobilePanel.style.transition = 'opacity 0.25s ease';
+        mobilePanel.style.opacity = '0';
+    }
+
     setTimeout(() => {
         if (titleElement) titleElement.textContent = nextData.title;
         if (descElement) descElement.textContent = nextData.desc;
+
+        // Update URL button for website carousel
+        if (type === 'website') {
+            const urlBtn = detailsContainer.querySelector('.slide-url-btn');
+            if (urlBtn) {
+                if (nextData.url) {
+                    urlBtn.href = nextData.url;
+                    urlBtn.style.display = 'inline-flex';
+                } else {
+                    urlBtn.style.display = 'none';
+                }
+            }
+        }
+
+        // Sync mobile panel text
+        if (mobilePanel) {
+            const mobileTitleEl = mobilePanel.querySelector('.slide-title');
+            const mobileDescEl = mobilePanel.querySelector('.slide-desc');
+            if (mobileTitleEl) mobileTitleEl.textContent = nextData.title;
+            if (mobileDescEl) mobileDescEl.textContent = nextData.desc;
+            mobilePanel.style.opacity = '1';
+        }
 
         // Apply fade-in animation
         detailsContainer.style.opacity = '1';
