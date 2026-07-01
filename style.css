@@ -2,17 +2,17 @@
    Design System & Variable Declarations
    ========================================================================== */
 :root {
-    --primary-color: #3a68a1; 
+    --primary-color: #3a68a1;
     --text-dark: #222222;
     --text-muted: #666666;
     --bg-light: #ffffff;
     --bg-dark: #333;
     --border-color: #e0e0e0;
-    
+
     /* Typography */
     --font-serif: 'Cormorant Garamond', 'Noto Serif JP', serif;
     --font-sans: 'Outfit', 'Noto Sans JP', sans-serif;
-    
+
     /* Transitions */
     --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     --transition-carousel: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -68,7 +68,6 @@ a {
 }
 
 .header-container {
-    max-width: 1920px;
     height: 100%;
     margin: 0 auto;
     padding: 0 60px;
@@ -132,7 +131,6 @@ a {
    Page Wrapper
    ========================================================================== */
 .page-wrapper {
-    max-width: 1920px;
     /* margin: 80px auto 0 auto; */
     margin: 0 auto;
     background-color: #ffffff;
@@ -154,19 +152,19 @@ a {
    Section 2: Intro Section
    ========================================================================== */
 .section-intro {
-    width: 1440px;
-    margin: 6rem 1rem 0;
+    width: min(1440px, 90%);
+    margin: 6rem auto 0;
     display: flex;
     flex-direction: column;
 }
 
-.intro-overlay-info{
+.intro-overlay-info {
     font-size: 1rem;
     z-index: 10;
     color: #222222;
 }
 
-.ja-lead{
+.ja-lead {
     font-size: 2rem;
     margin: 0 auto 2rem;
 }
@@ -182,6 +180,7 @@ a {
     aspect-ratio: 1920 / 1400;
     position: relative;
     background-color: #f7f7f7;
+    container-type: size;
 }
 
 .mockup-bg-container {
@@ -247,14 +246,12 @@ a {
 /* Navigation controls for phone mockup */
 .section-phone .carousel-arrow {
     position: absolute;
-    bottom: 7.5%;
+    bottom: 8%;
     transform: translateY(-50%);
-    background-color: var(--primary-color);
+    background: none;
     border: none;
-    width: auto;
-    height: auto;
-    border-radius: 50%;
-    font-size: 3vw;
+    /* font-size scales with the section-phone container height (aspect-ratio 1920/1400) */
+    font-size: clamp(14px, 5.5cqh, 80px);
     color: #ffffff;
     cursor: pointer;
     z-index: 20;
@@ -262,6 +259,9 @@ a {
     align-items: center;
     justify-content: center;
     transition: var(--transition-smooth);
+    line-height: 1;
+    padding: 0;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
 }
 
 .section-phone .carousel-arrow:hover {
@@ -269,11 +269,13 @@ a {
 }
 
 .section-phone .carousel-arrow.prev {
-    left: 40%; /* Positioned outside left edge of phone */
+    left: 40%;
+    /* Positioned outside left edge of phone */
 }
 
 .section-phone .carousel-arrow.next {
-    right: 43%; /* Positioned outside right edge of phone */
+    right: 43%;
+    /* Positioned outside right edge of phone */
 }
 
 .section-phone .carousel-dots {
@@ -301,6 +303,32 @@ a {
     border-radius: 4px;
 }
 
+/* Mobile-only text panel below phone mockup (hidden on desktop/tablet) */
+.phone-mobile-text {
+    display: none;
+    padding: 20px 24px 28px;
+    background-color: #f2f2f4;
+    border-top: 3px solid var(--primary-color);
+}
+
+.phone-mobile-text .slide-title {
+    font-size: clamp(1rem, 4.5vw, 1.3rem);
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    letter-spacing: 0.03em;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 6px;
+    display: inline-block;
+}
+
+.phone-mobile-text .slide-desc {
+    font-size: clamp(0.8rem, 3.2vw, 0.92rem);
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+}
+
 /* ==========================================================================
    Section 4 & 5: Split Grid Sections (Poster, Web Site, Philosophy)
    ========================================================================== */
@@ -314,7 +342,8 @@ a {
 
 /* Left/Right Text Info Pane */
 .split-info-pane {
-    width: 31.25%; /* 600px / 1920px */
+    width: 31.25%;
+    /* 600px / 1920px */
     display: flex;
     align-items: center;
     background-color: #ffffff;
@@ -328,7 +357,8 @@ a {
 
 /* Left/Right Mockup Image Pane */
 .split-mockup-pane {
-    width: 68.75%; /* 1320px / 1920px */
+    width: 68.75%;
+    /* 1320px / 1920px */
     aspect-ratio: 1320 / 900;
     background-size: cover;
     background-position: center;
@@ -392,9 +422,9 @@ a {
 
 .posterArrrow {
     position: absolute;
-    width: 26%;
-    top: 73%;
-    left: 14.5%;
+    width: 35%;
+    top: 45%;
+    left: 10%;
 }
 
 .webArrow {
@@ -432,16 +462,83 @@ a {
     letter-spacing: 0.1em;
 }
 
+/* --- Section 2: Poster arrows — same style as Section 1 phone arrows --- */
+#section2 .arrow-btn {
+    background: none;
+    border: none;
+    border-radius: 0;
+    width: auto;
+    height: auto;
+    color: #ffffff;
+    font-size: clamp(20px, 2.5vw, 40px);
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+}
+
+#section2 .arrow-btn:hover {
+    background: none;
+    color: rgba(255, 255, 255, 0.65);
+    border-color: transparent;
+    transform: none;
+}
+
+/* --- Section 3: Website arrows — keep background circle, thin chevron shape --- */
+#section3 .arrow-btn {
+    font-size: 0;
+    /* hide original text character */
+    overflow: visible;
+}
+
+#section3 .arrow-btn::before {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid currentColor;
+    border-left: 2px solid currentColor;
+    flex-shrink: 0;
+}
+
+#section3 .arrow-btn.prev::before {
+    transform: rotate(-45deg) translate(1px, 1px);
+}
+
+#section3 .arrow-btn.next::before {
+    transform: rotate(135deg) translate(1px, 1px);
+}
+
+/* --- Section 3: Website URL button --- */
+.slide-url-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 20px;
+    padding: 10px 22px;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    border-radius: 4px;
+    transition: var(--transition-smooth);
+    text-decoration: none;
+}
+
+.slide-url-btn:hover {
+    background-color: var(--text-dark);
+    transform: translateY(-2px);
+    color: #ffffff;
+}
+
 /* --- Section 2 (Poster Billboard) Carousel Area ---
    Coordinates relative to 1320x900 mockup pane:
    Left: 166px (12.5758%), Top: 141px (15.6667%), Width: 400px (30.303%), Height: 579px (64.3333%)
 */
 .poster-billboard-carousel {
     position: absolute;
-    left: 12.2%;
+    left: 12%;
     top: 11.5%;
-    width: 30.7%;
-    height: 60%;
+    width: 31%;
+    height: 68.2%;
     z-index: 20;
     overflow: hidden;
     background-color: #ffffff;
@@ -540,7 +637,7 @@ a {
 
 .contact-cta:hover {
     background-color: var(--primary-color);
-    box-shadow: 0 10px 25px rgba(46, 125, 50, 0.25);
+    box-shadow: 0 10px 25px rgba(58, 104, 161, 0.35);
     transform: translateY(-2px);
 }
 
@@ -570,7 +667,6 @@ a {
 }
 
 .footer-container {
-    max-width: 1920px;
     margin: 0 auto;
     padding: 0 60px;
     display: flex;
@@ -586,115 +682,456 @@ a {
 /* ==========================================================================
    Media Queries & Responsiveness
    ========================================================================== */
-@media (max-width: 1200px) {
-    .header-container {
-        padding: 0 40px;
+
+/* ------------------------------------------------------------------
+   ≥ 1920px: Fluid scale — everything stretches with viewport width
+   ------------------------------------------------------------------ */
+@media (min-width: 1920px) {
+    /* Hero scales naturally via aspect-ratio */
+
+    .section-intro {
+        width: min(75vw, 1800px);
     }
-    
+
+    .ja-lead {
+        font-size: clamp(2rem, 2.5vw, 3rem);
+    }
+
+    .intro-overlay-info p {
+        font-size: clamp(1rem, 1.1vw, 1.4rem);
+    }
+
+    .section-split {
+        margin: clamp(10rem, 15vw, 22rem) auto;
+    }
+
     .split-info-pane {
-        padding: 40px;
+        padding: clamp(60px, 5vw, 100px);
+    }
+
+    .dynamic-slide-info .slide-title {
+        font-size: clamp(1.6rem, 2vw, 2.4rem);
+    }
+
+    .dynamic-slide-info .slide-desc {
+        font-size: clamp(1rem, 1.1vw, 1.3rem);
+    }
+
+    .static-content h3 {
+        font-size: clamp(1.4rem, 1.8vw, 2.2rem);
+    }
+
+    .static-content p {
+        font-size: clamp(1rem, 1.1vw, 1.3rem);
+    }
+
+    .arrow-btn {
+        width: clamp(50px, 3.5vw, 70px);
+        height: clamp(50px, 3.5vw, 70px);
+        font-size: clamp(20px, 1.5vw, 28px);
     }
 }
 
-@media (max-width: 1024px) {
+/* ------------------------------------------------------------------
+   1280px – 1919px: Default desktop design (unchanged from base)
+   ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+   640px – 1279px: Tablet layout
+   ------------------------------------------------------------------ */
+@media (max-width: 1279px) {
+
+    /* ---- Header ---- */
     .main-header {
-        height: 70px;
-    }
-    .header-container {
-        padding: 0 30px;
-    }
-    .nav-menu ul {
-        gap: 25px;
-    }
-    .page-wrapper {
-        margin-top: 70px;
+        height: 68px;
     }
 
-    /* Stack Split Panes Vertically */
+    .header-container {
+        padding: 0 32px;
+    }
+
+    .nav-menu ul {
+        gap: 24px;
+    }
+
+    .page-wrapper {
+        margin-top: 0;
+    }
+
+    /* ---- Intro ---- */
+    .section-intro {
+        width: min(100%, calc(100% - 4rem));
+        margin: 4rem auto 0;
+    }
+
+    .ja-lead {
+        font-size: clamp(1.4rem, 3vw, 2rem);
+        margin-bottom: 1.5rem;
+    }
+
+    .intro-overlay-info {
+        font-size: clamp(0.85rem, 1.5vw, 1rem);
+    }
+
+    /* ---- Section title (big decorative heading) ---- */
+    .section-main-title {
+        font-size: clamp(3.5rem, 8vw, 10.5vw);
+        top: -4.5%;
+    }
+
+    /* ---- Split sections: stack vertically ---- */
     .section-split {
         flex-direction: column;
+        margin: clamp(4rem, 8vw, 12rem) auto;
     }
-    
+
+    .section-website {
+        flex-direction: column-reverse;
+    }
+
     .split-info-pane {
         width: 100%;
-        padding: 50px 30px;
+        padding: 48px 40px;
     }
-    
+
     .pane-content-wrapper {
         max-width: 100%;
-        width: 100%;
         text-align: center;
     }
-    
+
     .dynamic-slide-info {
-        margin-bottom: 25px;
+        margin-bottom: 20px;
         min-height: auto;
     }
-    
+
+    .dynamic-slide-info .slide-title {
+        font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+    }
+
+    .dynamic-slide-info .slide-desc {
+        font-size: clamp(0.85rem, 1.5vw, 1rem);
+    }
+
     .navigation-controls {
         justify-content: center;
+        gap: 16px;
     }
-    
+
     .split-mockup-pane {
         width: 100%;
         aspect-ratio: 1320 / 900;
     }
 
-    /* Stack order correction: Website text should be above iMac screen on tablet/mobile */
-    .section-website {
-        flex-direction: column-reverse;
+    /* ---- Phone mockup carousel ---- */
+    .section-phone {
+        aspect-ratio: 1920 / 1400;
     }
 
-    /* Phone Arrows margins */
-    .section-phone .carousel-arrow.prev {
-        left: 31%;
+    .phone-screen-carousel {
+        left: 36.8%;
+        top: 27%;
+        width: 23.75%;
+        height: 34%;
     }
+
+    .phone-text-overlay {
+        left: 36.8%;
+        top: 61%;
+        width: 23.75%;
+        padding: 0.75rem;
+    }
+
+    .phone-text-overlay .slide-title {
+        font-size: clamp(0.8rem, 1.5vw, 1.2rem);
+        margin-bottom: 8px;
+    }
+
+    .phone-text-overlay .slide-desc {
+        font-size: clamp(0.65rem, 1.1vw, 0.9rem);
+    }
+
+    .section-phone .carousel-arrow {
+        font-size: clamp(12px, 2.1cqh, 40px);
+    }
+
+    .section-phone .carousel-arrow.prev {
+        left: 33%;
+    }
+
     .section-phone .carousel-arrow.next {
-        right: 31%;
+        right: 36%;
+    }
+
+    .section-phone .carousel-dots {
+        bottom: 18%;
+    }
+
+    /* ---- Poster carousel (inside sec2_bg) ---- */
+    .poster-billboard-carousel {
+        left: 12.2%;
+        top: 11.5%;
+        width: 30.7%;
+        height: 60%;
+    }
+
+    .posterArrrow {
+        width: 28%;
+        top: 73%;
+        left: 14%;
+    }
+
+    /* ---- Website (iMac) carousel (inside sec3_bg) ---- */
+    .imac-screen-carousel {
+        left: 37%;
+        top: 12.5%;
+        width: 56%;
+        height: 46.5%;
+    }
+
+    .webArrow {
+        width: 52%;
+        top: 66%;
+        left: 38%;
+    }
+
+    /* ---- Philosophy section ---- */
+    .static-content h3 {
+        font-size: clamp(1.1rem, 2vw, 1.4rem);
+    }
+
+    .static-content p {
+        font-size: clamp(0.85rem, 1.4vw, 0.95rem);
     }
 }
 
-@media (max-width: 767px) {
+/* ------------------------------------------------------------------
+   ≤ 639px: Smartphone layout
+   ------------------------------------------------------------------ */
+@media (max-width: 639px) {
+
+    /* ---- Header ---- */
     .main-header {
-        position: absolute; /* Disable fixed navigation on small mobiles for better screen space */
-        height: 60px;
+        position: relative;
+        height: 56px;
     }
+
     .header-container {
-        padding: 0 20px;
+        padding: 0 16px;
     }
+
     .logo img {
-        height: 28px;
+        height: 26px;
     }
+
     .nav-menu {
-        display: none; /* Hide header menu, simple top header on mobile */
+        display: none;
     }
+
     .page-wrapper {
         margin-top: 0;
     }
 
-    .split-info-pane {
-        padding: 40px 20px;
-    }
-    
-    /* Adjust text size on mobile */
-    .section-main-title {
-        font-size: 2.2rem;
-    }
-    
-    .static-content h3 {
-        font-size: 1.2rem;
+    /* ---- Hero: make it taller on narrow screens ---- */
+    .section-hero {
+        aspect-ratio: auto;
+        height: 52vw;
+        min-height: 200px;
     }
 
-    /* Phone navigation arrows spacing on mobile */
+    /* ---- Intro ---- */
+    .section-intro {
+        width: calc(100% - 2.5rem);
+        margin: 2.5rem auto 0;
+    }
+
+    .ja-lead {
+        font-size: clamp(1.2rem, 5vw, 1.6rem);
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    .intro-overlay-info {
+        font-size: clamp(0.8rem, 3.2vw, 0.95rem);
+    }
+
+    .intro-overlay-info p {
+        text-align: justify;
+    }
+
+    /* ---- Decorative section title ---- */
+    .section-main-title {
+        font-size: clamp(2rem, 9vw, 3.2rem);
+        top: -3.5%;
+        line-height: 1;
+        letter-spacing: -0.01em;
+    }
+
+    /* ---- Split sections: single column ---- */
+    .section-split {
+        flex-direction: column;
+        margin: clamp(2.5rem, 6vw, 5rem) auto;
+    }
+
+    .section-website {
+        flex-direction: column-reverse;
+    }
+
+    .split-info-pane {
+        width: 100%;
+        padding: 32px 20px;
+    }
+
+    .pane-content-wrapper {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .dynamic-slide-info {
+        margin-bottom: 16px;
+        min-height: auto;
+    }
+
+    .dynamic-slide-info .slide-title {
+        font-size: clamp(1rem, 4.5vw, 1.3rem);
+        margin-bottom: 8px;
+    }
+
+    .dynamic-slide-info .slide-desc {
+        font-size: clamp(0.78rem, 3.2vw, 0.9rem);
+        line-height: 1.55;
+    }
+
+    .slide-counter {
+        font-size: 0.8rem;
+    }
+
+    .navigation-controls {
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .arrow-btn {
+        width: 42px;
+        height: 42px;
+        font-size: 16px;
+    }
+
+    .split-mockup-pane {
+        width: 100%;
+        aspect-ratio: 1320 / 900;
+    }
+
+    /* ---- Phone mockup: reflow as block image + info below ---- */
+    .section-phone {
+        /* Keep aspect ratio so background image is visible */
+        aspect-ratio: 1920 / 1400;
+    }
+
+    .phone-screen-carousel {
+        /* Tighten coordinates for narrow viewport */
+        left: 36.2%;
+        top: 26%;
+        width: 24.5%;
+        height: 35%;
+    }
+
+    /* Hide the in-mockup text overlay on smartphones (too small to read) */
+    .phone-text-overlay {
+        display: none;
+    }
+
+    /* Show the dedicated mobile text panel below the mockup instead */
+    .phone-mobile-text {
+        display: block;
+    }
+
     .section-phone .carousel-arrow {
-        width: 32px;
-        height: 32px;
-        font-size: 12px;
+        font-size: clamp(14px, 2.1cqh, 22px);
+        width: auto;
+        height: auto;
+        padding: 0;
     }
+
     .section-phone .carousel-arrow.prev {
-        left: 32%;
+        left: 27%;
     }
+
     .section-phone .carousel-arrow.next {
-        right: 32%;
+        right: 29%;
+    }
+
+    .section-phone .carousel-dots {
+        bottom: 17%;
+        gap: 5px;
+    }
+
+    .section-phone .dot {
+        width: 6px;
+        height: 6px;
+    }
+
+    .section-phone .dot.active {
+        width: 14px;
+    }
+
+    /* ---- Poster carousel ---- */
+    .poster-billboard-carousel {
+        left: 12.2%;
+        top: 11.5%;
+        width: 30.7%;
+        height: 60%;
+    }
+
+    .posterArrrow {
+        width: 34%;
+        top: 72%;
+        left: 12%;
+    }
+
+    /* ---- iMac carousel ---- */
+    .imac-screen-carousel {
+        left: 37%;
+        top: 12.5%;
+        width: 56%;
+        height: 46.5%;
+    }
+
+    .webArrow {
+        width: 60%;
+        top: 65%;
+        left: 35%;
+    }
+
+    /* ---- Philosophy section ---- */
+    .section-philosophy .split-info-pane {
+        padding: 32px 20px;
+    }
+
+    .static-content h3 {
+        font-size: clamp(1rem, 4.5vw, 1.25rem);
+    }
+
+    .static-content p {
+        font-size: clamp(0.78rem, 3.2vw, 0.9rem);
+        margin-bottom: 18px;
+    }
+
+    .contact-cta {
+        padding: 12px 28px;
+        font-size: 0.82rem;
+    }
+
+    .section-title-tag {
+        font-size: 0.75rem;
+    }
+
+    /* ---- Footer ---- */
+    .footer-container {
+        padding: 0 20px;
+    }
+
+    .footer-container p {
+        font-size: 0.75rem;
+        text-align: center;
     }
 }
