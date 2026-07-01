@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nago Design - Portfolio</title>
+    <!-- Google Fonts: Cormorant Garamond for Serif title & Outfit for Sans-serif body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Sticky Navigation Bar -->
+    <!-- <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <img src="assets/Logo.png" alt="Nago Design" id="site-logo">
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="#hero">Top</a></li>
+                    <li><a href="#section1">Works</a></li>
+                    <li><a href="#section2">Poster</a></li>
+                    <li><a href="#section3">Web Design</a></li>
+                    <li><a href="#section4">Philosophy</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header> -->
+
+    <div class="page-wrapper">
+
+        <!-- (1) First View (Hero) Section -->
+        <section id="hero" class="section-hero">
+            <!-- Background is first_view.jpg, text is pre-baked in the image for pixel-perfect match, but we support visual layout overlay -->
+            <div class="hero-overlay-info" style="display:none;">
+                <h1>GRAPHIC &amp; WEB Design</h1>
+                <p>Nago Design WEB Designer Graphic Designer with Cats</p>
+            </div>
+        </section>
+
+        <!-- (2) Intro White Banner Section -->
+        <section id="intro" class="section-intro">
+            <!-- Background is intro.jpg containing introduction text -->
+            <div class="intro-overlay-info">
+                <p class="ja-lead">あなたの想いを届けるためのデザインを</p>
+                <p>ただ作ればいいわけじゃない。見栄えがいいだけじゃない。<br>
+                    伝えたい人の気持ちや誰かのためのこだわりを、向こう側の誰かまでちゃんと届ける。<br>
+                    人と人を繋ぐためにデザインはあるから。</p>
+            </div>
+        </section>
+
+        <!-- (3) Section 1: Smartphone Banner Section -->
+        <section id="section1" class="section-mockup section-phone">
+            <div class="mockup-bg-container" style="background-image: url('assets/sec1_bg.jpg');">
+                
+                <!-- Phone Screen Carousel Overlay -->
+                <div class="carousel-container phone-screen-carousel">
+                    <div class="carousel-track-wrapper">
+                        <div class="carousel-track" id="phone-track">
+                            <!-- Slides will be inserted dynamically by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phone Text Overlay (to hide static background text and show dynamic slide details) -->
+                <div class="phone-text-overlay" id="phone-details">
+                    <h3 class="slide-title">Loading...</h3>
+                    <p class="slide-desc"></p>
+                </div>
+
+                <!-- Custom Navigation Arrows for Phone -->
+                <button class="carousel-arrow prev" onclick="moveCarousel('phone', -1)" aria-label="Previous slide">&#10094;</button>
+                <button class="carousel-arrow next" onclick="moveCarousel('phone', 1)" aria-label="Next slide">&#10095;</button>
+
+                <!-- Navigation Dots -->
+                <div class="carousel-dots" id="phone-dots"></div>
+            </div>
+        </section>
+
+        <!-- (4) Section 2: Poster Design Section (Split Left-Right) -->
+        <section id="section2" class="section-split section-poster">
+                    <h2 class="section-main-title">POSTER DESIGN</h2>
+            <!-- Left Info Pane -->
+            <div class="split-info-pane">
+                <div class="pane-content-wrapper">
+                    <div class="dynamic-slide-info" id="poster-details">
+                        <h3 class="slide-title">Loading Title...</h3>
+                        <p class="slide-desc">Loading description...</p>
+                    </div>
+                    <span class="slide-counter" id="poster-counter">1 / 1</span>
+                </div>
+            </div>
+            <!-- Right Mockup Pane -->
+            <div class="split-mockup-pane" style="background-image: url('assets/sec2_bg.jpg');">
+                <!-- Billboard Screen Carousel Overlay -->
+                <div class="carousel-container poster-billboard-carousel">
+                    <div class="carousel-track-wrapper">
+                        <div class="carousel-track" id="poster-track">
+                            <!-- Slides will be inserted dynamically by JS -->
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation-controls posterArrrow">
+                    <button class="arrow-btn prev" onclick="moveCarousel('poster', -1)" aria-label="Previous Poster">&#8592;</button>
+                    <button class="arrow-btn next" onclick="moveCarousel('poster', 1)" aria-label="Next Poster">&#8594;</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- (5) Section 3: Web Site Design Section (Split Left-Right) -->
+        <section id="section3" class="section-split section-website">
+                    <h2 class="section-main-title">WEB SITE DESIGN</h2>
+            <!-- Left Mockup Pane -->
+            <div class="split-mockup-pane" style="background-image: url('assets/sec3_bg.jpg');">
+                <!-- iMac Screen Carousel Overlay -->
+                <div class="carousel-container imac-screen-carousel">
+                    <div class="carousel-track-wrapper">
+                        <div class="carousel-track" id="website-track">
+                            <!-- Slides will be inserted dynamically by JS -->
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation-controls webArrow">
+                        <button class="arrow-btn prev" onclick="moveCarousel('website', -1)" aria-label="Previous Website">&#8592;</button>
+                        <button class="arrow-btn next" onclick="moveCarousel('website', 1)" aria-label="Next Website">&#8594;</button>
+                </div>
+            </div>
+            <!-- Right Info Pane -->
+            <div class="split-info-pane">
+                <div class="pane-content-wrapper">
+                    <div class="dynamic-slide-info" id="website-details">
+                        <h3 class="slide-title">Loading Title...</h3>
+                        <p class="slide-desc">Loading description...</p>
+                    </div>
+                    <span class="slide-counter" id="website-counter">1 / 1</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- (6) Section 4: Dark Section (Split Left-Right) -->
+        <section id="section4" class="section-split section-philosophy">
+            <!-- Left Info Pane -->
+            <div class="split-info-pane">
+                <div class="pane-content-wrapper">
+                    <div class="section-title-tag">ATHER DESIGNS</div>
+                    <h2 class="section-main-title">PRODUCT DESIGN</h2>
+                    <div class="static-content">
+                        <h3>商品設計から伴走する</h3>
+                        <p>
+                            私たちのデザインは、単なる装飾ではありません。クライアントが心に描くビジョンや、伝えたいメッセージを深く理解し、視覚的なストーリーへと翻訳すること。それが私たちの役割です。
+                        </p>
+                        <p>
+                            使いやすさ（UI/UX）、色彩設計、タイポグラフィ、および猫のように自由でしなやかな発想力を組み合わせ、人々の心に残るプロダクトを生み出します。
+                        </p>
+                        <a href="mailto:info@nagodesign.example.com" class="contact-cta">Get in Touch</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Dark Mockup Pane -->
+            <div class="split-mockup-pane" style="background-image: url('assets/sec4_bg.jpg');">
+                <!-- Solid dark grey aesthetic block with branding watermark -->
+                <div class="philosophy-watermark">
+                    <span class="watermark-text">Nago Design</span>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <p>&copy; 2026 Nago Design with Cats. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
