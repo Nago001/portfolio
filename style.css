@@ -1,0 +1,700 @@
+/* ==========================================================================
+   Design System & Variable Declarations
+   ========================================================================== */
+:root {
+    --primary-color: #3a68a1; 
+    --text-dark: #222222;
+    --text-muted: #666666;
+    --bg-light: #ffffff;
+    --bg-dark: #333;
+    --border-color: #e0e0e0;
+    
+    /* Typography */
+    --font-serif: 'Cormorant Garamond', 'Noto Serif JP', serif;
+    --font-sans: 'Outfit', 'Noto Sans JP', sans-serif;
+    
+    /* Transitions */
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    --transition-carousel: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset and Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    background-color: #f7f7f7;
+}
+
+body {
+    font-family: var(--font-sans);
+    color: var(--text-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+/* ==========================================================================
+   Sticky Header Layout & Glassmorphism
+   ========================================================================== */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: var(--transition-smooth);
+}
+
+.main-header.scrolled {
+    height: 65px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+}
+
+.header-container {
+    max-width: 1920px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    transition: var(--transition-smooth);
+}
+
+.main-header.scrolled .logo img {
+    height: 32px;
+}
+
+.nav-menu ul {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+}
+
+.nav-menu a {
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    position: relative;
+    padding: 5px 0;
+}
+
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: var(--transition-smooth);
+}
+
+.nav-menu a:hover {
+    color: var(--text-dark);
+}
+
+.nav-menu a:hover::after {
+    width: 100%;
+}
+
+/* ==========================================================================
+   Page Wrapper
+   ========================================================================== */
+.page-wrapper {
+    max-width: 1920px;
+    /* margin: 80px auto 0 auto; */
+    margin: 0 auto;
+    background-color: #ffffff;
+}
+
+/* ==========================================================================
+   Section 1: Hero Section (First View)
+   ========================================================================== */
+.section-hero {
+    width: 100%;
+    aspect-ratio: 1920 / 900;
+    background-image: url('assets/first_view.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* ==========================================================================
+   Section 2: Intro Section
+   ========================================================================== */
+.section-intro {
+    width: 1440px;
+    margin: 6rem 1rem 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.intro-overlay-info{
+    font-size: 1rem;
+    z-index: 10;
+    color: #222222;
+}
+
+.ja-lead{
+    font-size: 2rem;
+    margin: 0 auto 2rem;
+}
+
+
+
+/* ==========================================================================
+   Section 3: Mockup Container (Section 1 in Wireframe - Phone)
+   ========================================================================== */
+.section-phone {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1920 / 1400;
+    position: relative;
+    background-color: #f7f7f7;
+}
+
+.mockup-bg-container {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* --- Carousel Container Inside Smartphone Bezel ---
+   Detected Coordinates relative to 1920x900 background:
+   Left: 761px (39.6354%), Top: 187px (20.7778%), Width: 370px (19.2708%), Height: 300px (33.3333%)
+*/
+.phone-screen-carousel {
+    position: absolute;
+    left: 36.8%;
+    top: 27%;
+    width: 23.75%;
+    height: 34%;
+    z-index: 10;
+    overflow: hidden;
+}
+
+
+/* --- Smartphone Text Overlay Area ---
+   Hides static text pre-baked in the background and shows dynamic texts.
+   Left: 761px (39.6354%), Top: 487px (54.1111%), Width: 370px (19.2708%), Height: 200px (22.2222%)
+*/
+.phone-text-overlay {
+    position: absolute;
+    left: 36.8%;
+    top: 61%;
+    width: 23.75%;
+    height: 22.2222%;
+    z-index: 15;
+    background-color: #f2f2f4;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
+.phone-text-overlay .slide-title {
+    font-size: clamp(1rem, 1.2vw, 1.5rem);
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 4px;
+    align-self: flex-start;
+}
+
+.phone-text-overlay .slide-desc {
+    font-size: clamp(0.75rem, 0.85vw, 1rem);
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Navigation controls for phone mockup */
+.section-phone .carousel-arrow {
+    position: absolute;
+    bottom: 7.5%;
+    transform: translateY(-50%);
+    background-color: var(--primary-color);
+    border: none;
+    width: auto;
+    height: auto;
+    border-radius: 50%;
+    font-size: 3vw;
+    color: #ffffff;
+    cursor: pointer;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+}
+
+.section-phone .carousel-arrow:hover {
+    opacity: 0.7;
+}
+
+.section-phone .carousel-arrow.prev {
+    left: 40%; /* Positioned outside left edge of phone */
+}
+
+.section-phone .carousel-arrow.next {
+    right: 43%; /* Positioned outside right edge of phone */
+}
+
+.section-phone .carousel-dots {
+    position: absolute;
+    left: 49.27%;
+    transform: translateX(-50%);
+    bottom: 18%;
+    z-index: 20;
+    display: flex;
+    gap: 8px;
+}
+
+.section-phone .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #cccccc;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.section-phone .dot.active {
+    background-color: var(--primary-color);
+    width: 20px;
+    border-radius: 4px;
+}
+
+/* ==========================================================================
+   Section 4 & 5: Split Grid Sections (Poster, Web Site, Philosophy)
+   ========================================================================== */
+.section-split {
+    width: 100%;
+    display: flex;
+    background-color: #ffffff;
+    position: relative;
+    margin: 20rem auto;
+}
+
+/* Left/Right Text Info Pane */
+.split-info-pane {
+    width: 31.25%; /* 600px / 1920px */
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 60px;
+}
+
+.pane-content-wrapper {
+    max-width: 440px;
+    margin: 0 auto;
+}
+
+/* Left/Right Mockup Image Pane */
+.split-mockup-pane {
+    width: 68.75%; /* 1320px / 1920px */
+    aspect-ratio: 1320 / 900;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* Typography styles for splits */
+.section-title-tag {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.section-main-title {
+    font-family: var(--font-sans);
+    font-size: 10.5vw;
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    letter-spacing: -0.02em;
+    position: absolute;
+    z-index: 10;
+    top: -6%;
+    left: 1rem;
+}
+
+#section3 .section-main-title {
+    right: 1rem;
+    left: auto;
+}
+
+/* Dynamic Slide Text Pane */
+.dynamic-slide-info {
+    margin-bottom: 40px;
+    min-height: 120px;
+}
+
+.dynamic-slide-info .slide-title {
+    font-size: clamp(1.2rem, 1.6vw, 1.8rem);
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+}
+
+.dynamic-slide-info .slide-desc {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* Split Section Controls */
+.navigation-controls {
+    display: flex;
+    justify-content: space-between;
+    z-index: 25;
+}
+
+.posterArrrow {
+    position: absolute;
+    width: 26%;
+    top: 73%;
+    left: 14.5%;
+}
+
+.webArrow {
+    position: absolute;
+    width: 50%;
+    top: 66%;
+    left: 40%;
+}
+
+.arrow-btn {
+    background: var(--border-color);
+    border: 1px solid var(--text-muted);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 20px;
+    color: var(--text-dark);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+}
+
+.arrow-btn:hover {
+    background-color: var(--text-dark);
+    color: #ffffff;
+    border-color: var(--text-dark);
+}
+
+.slide-counter {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+}
+
+/* --- Section 2 (Poster Billboard) Carousel Area ---
+   Coordinates relative to 1320x900 mockup pane:
+   Left: 166px (12.5758%), Top: 141px (15.6667%), Width: 400px (30.303%), Height: 579px (64.3333%)
+*/
+.poster-billboard-carousel {
+    position: absolute;
+    left: 12.2%;
+    top: 11.5%;
+    width: 30.7%;
+    height: 60%;
+    z-index: 20;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+/* --- Section 3 (iMac Screen) Carousel Area ---
+   Coordinates relative to 1320x900 mockup pane:
+   Left: 495px (37.5%), Top: 136px (15.1111%), Width: 727px (55.0758%), Height: 41.3333% (41.3333%)
+*/
+.imac-screen-carousel {
+    position: absolute;
+    left: 37%;
+    top: 12.5%;
+    width: 56%;
+    height: 46.5%;
+    z-index: 10;
+    overflow: hidden;
+    background-color: #000;
+}
+
+/* ==========================================================================
+   Carousel Core Styling
+   ========================================================================== */
+.carousel-track-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.carousel-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: var(--transition-carousel);
+}
+
+.carousel-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-slide img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    transform: translate(-50%, -50%);
+    display: block;
+}
+
+/* ==========================================================================
+   Section 4: Philosophy Static Content
+   ========================================================================== */
+.section-philosophy {
+    border-top: 1px solid var(--border-color);
+}
+
+.section-philosophy .split-mockup-pane {
+    aspect-ratio: 1320 / 893;
+}
+
+.static-content h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
+
+.static-content p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 25px;
+    line-height: 1.7;
+    text-align: justify;
+}
+
+.contact-cta {
+    display: inline-block;
+    padding: 14px 35px;
+    background-color: var(--text-dark);
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 30px;
+    transition: var(--transition-smooth);
+    margin-top: 15px;
+}
+
+.contact-cta:hover {
+    background-color: var(--primary-color);
+    box-shadow: 0 10px 25px rgba(46, 125, 50, 0.25);
+    transform: translateY(-2px);
+}
+
+.philosophy-watermark {
+    position: absolute;
+    bottom: 60px;
+    right: 60px;
+    opacity: 0.05;
+}
+
+.watermark-text {
+    font-family: var(--font-serif);
+    font-size: 5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    user-select: none;
+}
+
+/* ==========================================================================
+   Footer Styling
+   ========================================================================== */
+.main-footer {
+    background-color: #111111;
+    color: #888888;
+    padding: 40px 0;
+    border-top: 1px solid #222222;
+}
+
+.footer-container {
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-container p {
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+}
+
+/* ==========================================================================
+   Media Queries & Responsiveness
+   ========================================================================== */
+@media (max-width: 1200px) {
+    .header-container {
+        padding: 0 40px;
+    }
+    
+    .split-info-pane {
+        padding: 40px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .main-header {
+        height: 70px;
+    }
+    .header-container {
+        padding: 0 30px;
+    }
+    .nav-menu ul {
+        gap: 25px;
+    }
+    .page-wrapper {
+        margin-top: 70px;
+    }
+
+    /* Stack Split Panes Vertically */
+    .section-split {
+        flex-direction: column;
+    }
+    
+    .split-info-pane {
+        width: 100%;
+        padding: 50px 30px;
+    }
+    
+    .pane-content-wrapper {
+        max-width: 100%;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .dynamic-slide-info {
+        margin-bottom: 25px;
+        min-height: auto;
+    }
+    
+    .navigation-controls {
+        justify-content: center;
+    }
+    
+    .split-mockup-pane {
+        width: 100%;
+        aspect-ratio: 1320 / 900;
+    }
+
+    /* Stack order correction: Website text should be above iMac screen on tablet/mobile */
+    .section-website {
+        flex-direction: column-reverse;
+    }
+
+    /* Phone Arrows margins */
+    .section-phone .carousel-arrow.prev {
+        left: 31%;
+    }
+    .section-phone .carousel-arrow.next {
+        right: 31%;
+    }
+}
+
+@media (max-width: 767px) {
+    .main-header {
+        position: absolute; /* Disable fixed navigation on small mobiles for better screen space */
+        height: 60px;
+    }
+    .header-container {
+        padding: 0 20px;
+    }
+    .logo img {
+        height: 28px;
+    }
+    .nav-menu {
+        display: none; /* Hide header menu, simple top header on mobile */
+    }
+    .page-wrapper {
+        margin-top: 0;
+    }
+
+    .split-info-pane {
+        padding: 40px 20px;
+    }
+    
+    /* Adjust text size on mobile */
+    .section-main-title {
+        font-size: 2.2rem;
+    }
+    
+    .static-content h3 {
+        font-size: 1.2rem;
+    }
+
+    /* Phone navigation arrows spacing on mobile */
+    .section-phone .carousel-arrow {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+    }
+    .section-phone .carousel-arrow.prev {
+        left: 32%;
+    }
+    .section-phone .carousel-arrow.next {
+        right: 32%;
+    }
+}
