@@ -244,43 +244,62 @@ a {
 }
 
 /* Navigation controls for phone mockup */
-.section-phone .carousel-arrow {
+.section-phone .phone-buttons {
     position: absolute;
-    bottom: 8%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    /* font-size scales with the section-phone container height (aspect-ratio 1920/1400) */
-    font-size: clamp(14px, 5.5cqh, 80px);
-    color: #ffffff;
-    cursor: pointer;
+    bottom: 10%;
+    left: 40%;
     z-index: 20;
     display: flex;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    width: 17vw;
     transition: var(--transition-smooth);
     line-height: 1;
     padding: 0;
     text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
 }
 
+.section-phone .carousel-arrow {
+    background: none;
+    border: none;
+    color: #ffffff;
+    /* font-size scales with the section-phone container height (aspect-ratio 1920/1400) */
+    font-size: clamp(20px, 5.5cqh, 60px);
+    cursor: pointer;
+}
+
 .section-phone .carousel-arrow:hover {
-    opacity: 0.7;
+    color: var(--border-color);
 }
 
-.section-phone .carousel-arrow.prev {
-    left: 40%;
-    /* Positioned outside left edge of phone */
+.section-phone .phone-all {
+    display: block;
+    background: var(--primary-color);
+    border: 2px solid var(--bg-light);
+    width: 12rem;
+    height: 3rem;
+    border-radius: 4px;
+    font-size: clamp(14px, 2.1cqh, 32px);
+    font-family: var(--font-sans);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+    margin-top: 2%;
+    cursor: pointer;
 }
 
-.section-phone .carousel-arrow.next {
-    right: 43%;
-    /* Positioned outside right edge of phone */
+.section-phone .phone-all:hover {
+    background: var(--border-color);
+    border: 2px solid var(--bg-light);
+    color: var(--primary-color);
 }
 
 .section-phone .carousel-dots {
     position: absolute;
-    left: 49.27%;
+    left: 48.5%;
     transform: translateX(-50%);
     bottom: 18%;
     z-index: 20;
@@ -422,9 +441,9 @@ a {
 
 .posterArrrow {
     position: absolute;
-    width: 35%;
+    width: 37%;
     top: 45%;
-    left: 10%;
+    left: 9%;
 }
 
 .webArrow {
@@ -463,32 +482,14 @@ a {
 }
 
 /* --- Section 2: Poster arrows — same style as Section 1 phone arrows --- */
-#section2 .arrow-btn {
-    background: none;
-    border: none;
-    border-radius: 0;
-    width: auto;
-    height: auto;
-    color: #ffffff;
-    font-size: clamp(20px, 2.5vw, 40px);
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
-}
-
-#section2 .arrow-btn:hover {
-    background: none;
-    color: rgba(255, 255, 255, 0.65);
-    border-color: transparent;
-    transform: none;
-}
-
 /* --- Section 3: Website arrows — keep background circle, thin chevron shape --- */
-#section3 .arrow-btn {
+.arrow-btn {
     font-size: 0;
     /* hide original text character */
     overflow: visible;
 }
 
-#section3 .arrow-btn::before {
+.arrow-btn::before {
     content: '';
     display: block;
     width: 10px;
@@ -498,11 +499,11 @@ a {
     flex-shrink: 0;
 }
 
-#section3 .arrow-btn.prev::before {
+.arrow-btn.prev::before {
     transform: rotate(-45deg) translate(1px, 1px);
 }
 
-#section3 .arrow-btn.next::before {
+.arrow-btn.next::before {
     transform: rotate(135deg) translate(1px, 1px);
 }
 
