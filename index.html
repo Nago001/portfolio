@@ -36,29 +36,42 @@
 
     <div class="page-wrapper">
 
-        <!-- (1) First View (Hero) Section -->
-        <section id="hero" class="section-hero">
-            <!-- Background is first_view.jpg, text is pre-baked in the image for pixel-perfect match, but we support visual layout overlay -->
-            <div class="hero-overlay-info" style="display:none;">
-                <h1>GRAPHIC &amp; WEB Design</h1>
-                <p>Nago Design WEB Designer Graphic Designer with Cats</p>
+        <!-- (1) First View (Hero) & Intro Combined Section -->
+        <section id="hero" class="hero-intro-combined">
+            <div class="hero-graphic">
+                <div class="hero-overlay-info" style="display:none;">
+                    <h1>GRAPHIC &amp; WEB Design</h1>
+                    <p>Nago Design WEB Designer Graphic Designer with Cats</p>
+                </div>
+            </div>
+
+            <!-- Intro White Banner Section inside Hero Section -->
+            <div id="intro" class="section-intro">
+                <div class="intro-overlay-info">
+                    <p class="ja-lead">あなたの想いを届けるためのデザインを</p>
+                    <p>ただ作ればいいわけじゃない。見栄えがいいだけじゃない。<br>
+                        伝えたい人の気持ちや誰かのためのこだわりを、向こう側の誰かまでちゃんと届ける。<br>
+                        人と人を繋ぐためにデザインはあるから。</p>
+                </div>
+            </div>
+
+            <!-- Rotating Round Text Overlay: RoundNago -->
+            <div class="round-text-overlay round-nago">
+                <img src="assets/RoundNago.png" alt="Nago Design circular text" class="rotating-circle">
             </div>
         </section>
 
-        <!-- (2) Intro White Banner Section -->
-        <section id="intro" class="section-intro">
-            <!-- Background is intro.jpg containing introduction text -->
-            <div class="intro-overlay-info">
-                <p class="ja-lead">あなたの想いを届けるためのデザインを</p>
-                <p>ただ作ればいいわけじゃない。見栄えがいいだけじゃない。<br>
-                    伝えたい人の気持ちや誰かのためのこだわりを、向こう側の誰かまでちゃんと届ける。<br>
-                    人と人を繋ぐためにデザインはあるから。</p>
-            </div>
-        </section>
-
-        <!-- (3) Section 1: Smartphone Banner Section -->
+        <!-- (2) Section 1: Smartphone Banner Section -->
         <section id="section1" class="section-mockup section-phone">
-            <div class="mockup-bg-container" style="background-image: url('assets/sec1_bg.jpg');">
+            <div class="mockup-bg-container" style="background-image: url('assets/sec1_bg.png');">
+
+                <!-- Rotating Round Text Overlays -->
+                <!-- RoundBanner: positioned over the keyboard/glasses area (right side) -->
+                <div class="round-text-overlay round-banner">
+                    <img src="assets/RoundBanner.png" alt="Banner Designs circular text"
+                        class="rotating-circle rotating-circle--reverse">
+                    <img src="assets/mouse.png" alt="Mouse" class="mouse">
+                </div>
 
                 <!-- Phone Screen Carousel Overlay -->
                 <div class="carousel-container phone-screen-carousel">
@@ -76,13 +89,13 @@
                 </div>
 
                 <!-- Custom Navigation Arrows for Phone -->
-                 <div class="phone-buttons">
-                  <button class="carousel-arrow prev" onclick="moveCarousel('phone', -1)"
-                      aria-label="Previous slide">&#10094;</button>
-                  <a class="phone-all">View All</a>
-                  <button class="carousel-arrow next" onclick="moveCarousel('phone', 1)"
-                     aria-label="Next slide">&#10095;</button>
-                 </div>
+                <div class="phone-buttons">
+                    <button class="carousel-arrow prev" onclick="moveCarousel('phone', -1)"
+                        aria-label="Previous slide">&#10094;</button>
+                    <a class="phone-all" href="gallery.html?category=phone">View All</a>
+                    <button class="carousel-arrow next" onclick="moveCarousel('phone', 1)"
+                        aria-label="Next slide">&#10095;</button>
+                </div>
 
                 <!-- Navigation Dots -->
                 <div class="carousel-dots" id="phone-dots"></div>
@@ -105,7 +118,10 @@
                         <h3 class="slide-title">Loading Title...</h3>
                         <p class="slide-desc">Loading description...</p>
                     </div>
-                    <span class="slide-counter" id="poster-counter">1 / 1</span>
+                    <div class="section-cta-row">
+                        <span class="slide-counter" id="poster-counter">1 / 1</span>
+                        <a href="gallery.html?category=poster" class="view-all-btn">View All &#10095;</a>
+                    </div>
                 </div>
             </div>
             <!-- Right Mockup Pane -->
@@ -155,7 +171,10 @@
                         <p class="slide-desc">Loading description...</p>
                         <a href="#" class="slide-url-btn" target="_blank" rel="noopener noreferrer">サイトを見る &#10095;</a>
                     </div>
-                    <span class="slide-counter" id="website-counter">1 / 1</span>
+                    <div class="section-cta-row">
+                        <span class="slide-counter" id="website-counter">1 / 1</span>
+                        <a href="gallery.html?category=website" class="view-all-btn">View All &#10095;</a>
+                    </div>
                 </div>
             </div>
         </section>
