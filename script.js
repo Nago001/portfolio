@@ -220,10 +220,10 @@ function initCarousel(type, trackId) {
  */
 function moveCarousel(type, direction) {
     resetAutoplay(type);
-    
+
     let state = carouselState[type];
     state.current = (state.current + direction + state.total) % state.total;
-    
+
     updateCarouselPosition(type);
 }
 
@@ -232,10 +232,10 @@ function moveCarousel(type, direction) {
  */
 function goToSlide(type, targetIndex) {
     resetAutoplay(type);
-    
+
     let state = carouselState[type];
     state.current = targetIndex;
-    
+
     updateCarouselPosition(type);
 }
 
@@ -280,7 +280,7 @@ function updateSlideText(type, index) {
 
     const titleElement = detailsContainer.querySelector('.slide-title');
     const descElement = detailsContainer.querySelector('.slide-desc');
-    
+
     const nextData = slideData[type][index];
     if (!nextData) return;
 
