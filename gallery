@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Nago Design Portfolio</title>
+    <meta name="description" content="Nago Designの全作品ギャラリー。バナー・SNS広告、ポスターデザイン、Webサイトデザインの実績をご覧いただけます。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #3a68a1;
+            --dark: #212121;
+            --text: #222222;
+            --muted: #666666;
+            --border: #e0e0e0;
+            --bg: #f7f7f7;
+            --white: #ffffff;
+            --font-serif: 'Cormorant Garamond', 'Noto Serif JP', serif;
+            --font-sans: 'Outfit', 'Noto Sans JP', sans-serif;
+            --ease: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        html { background-color: var(--dark); scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: var(--bg);
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        a { color: inherit; text-decoration: none; transition: var(--ease); }
+
+        /* ========== Header ========== */
+        .gallery-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            height: 70px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-inner {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .header-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--muted);
+            transition: var(--ease);
+        }
+        .header-back:hover { color: var(--primary); }
+        .header-back::before {
+            content: '';
+            display: block;
+            width: 7px;
+            height: 7px;
+            border-left: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(45deg);
+            flex-shrink: 0;
+        }
+
+        .header-title {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            color: var(--text);
+        }
+
+        /* ========== Category Tabs ========== */
+        .category-bar {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 0 48px;
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .category-bar::-webkit-scrollbar { display: none; }
+
+        .cat-tab {
+            flex-shrink: 0;
+            padding: 18px 32px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            cursor: pointer;
+            border: none;
+            background: none;
+            position: relative;
+            transition: var(--ease);
+            font-family: var(--font-sans);
+        }
+        .cat-tab::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 50%; right: 50%;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--ease);
+        }
+        .cat-tab:hover { color: var(--text); }
+        .cat-tab.active { color: var(--primary); }
+        .cat-tab.active::after { left: 0; right: 0; }
+
+        /* ========== Hero Banner ========== */
+        .gallery-hero {
+            padding: 56px 48px 40px;
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .hero-heading {
+            font-family: var(--font-sans);
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.0;
+            letter-spacing: -0.02em;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+
+        .hero-desc {
+            font-size: 0.95rem;
+            color: var(--muted);
+            max-width: 560px;
+            line-height: 1.75;
+        }
+
+        /* ========== Gallery Grid ========== */
+        .gallery-main {
+            padding: 40px 48px 80px;
+        }
+
+        .gallery-count {
+            font-size: 0.8rem;
+            color: var(--muted);
+            letter-spacing: 0.06em;
+            margin-bottom: 28px;
+        }
+
+        .gallery-count strong {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .gallery-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .gallery-grid.grid-phone   { grid-template-columns: repeat(4, 1fr); }
+        .gallery-grid.grid-poster  { grid-template-columns: repeat(3, 1fr); }
+        .gallery-grid.grid-website { grid-template-columns: repeat(2, 1fr); }
+
+        /* ========== Gallery Card ========== */
+        .gallery-card {
+            background: var(--white);
+            border-radius: 6px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            transition: var(--ease);
+        }
+        .gallery-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+        }
+
+        .card-img-wrap {
+            width: 100%;
+            overflow: hidden;
+            background: #f0f0f0;
+            position: relative;
+        }
+        .grid-phone   .card-img-wrap { aspect-ratio: 1 / 1; }
+        .grid-poster  .card-img-wrap { aspect-ratio: 2 / 3; }
+        .grid-website .card-img-wrap { aspect-ratio: 4 / 3; }
+
+        .card-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .gallery-card:hover .card-img-wrap img { transform: scale(1.05); }
+
+        .card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 50%);
+            opacity: 0;
+            transition: var(--ease);
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+        }
+        .gallery-card:hover .card-overlay { opacity: 1; }
+
+        .card-overlay-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+        }
+
+        .card-body {
+            padding: 16px 18px 18px;
+            border-top: 1px solid var(--border);
+        }
+
+        .card-title {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .card-desc {
+            font-size: 0.78rem;
+            color: var(--muted);
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* ========== Lightbox Modal ========== */
+        .lightbox-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(20,20,20,0.92);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .lightbox-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .lightbox-box {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            max-width: 1000px;
+            width: 100%;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            transform: scale(0.94) translateY(16px);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .lightbox-overlay.open .lightbox-box {
+            transform: scale(1) translateY(0);
+        }
+
+        .lightbox-img-area {
+            flex: 1;
+            background: #111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 0;
+            overflow: hidden;
+            max-height: 65vh;
+        }
+
+        .lightbox-img-area img {
+            max-width: 100%;
+            max-height: 65vh;
+            object-fit: contain;
+            display: block;
+        }
+
+        .lightbox-info {
+            padding: 24px 30px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .lightbox-text { flex: 1; min-width: 0; }
+
+        .lightbox-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .lightbox-desc {
+            font-size: 0.88rem;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .lightbox-nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .lb-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--ease);
+            flex-shrink: 0;
+        }
+        .lb-btn:hover { background: var(--text); border-color: var(--text); }
+        .lb-btn svg { width: 14px; height: 14px; stroke: var(--text); fill: none; transition: var(--ease); }
+        .lb-btn:hover svg { stroke: #fff; }
+
+        .lightbox-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--ease);
+        }
+        .lightbox-close:hover { background: rgba(255,255,255,0.25); }
+
+        .lb-counter {
+            font-size: 0.78rem;
+            color: var(--muted);
+            letter-spacing: 0.1em;
+            white-space: nowrap;
+            align-self: center;
+        }
+
+        /* ========== Footer ========== */
+        .gallery-footer {
+            background: #111;
+            color: #666;
+            text-align: center;
+            padding: 28px 20px;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            border-top: 1px solid #222;
+        }
+
+        /* ========== Responsive ========== */
+        @media (max-width: 1100px) {
+            .gallery-grid.grid-phone   { grid-template-columns: repeat(3, 1fr); }
+            .gallery-grid.grid-website { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .header-inner, .category-bar,
+            .gallery-hero, .gallery-main { padding-left: 20px; padding-right: 20px; }
+            .gallery-grid.grid-phone   { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid.grid-poster  { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid.grid-website { grid-template-columns: 1fr; }
+            .cat-tab { padding: 14px 20px; font-size: 0.75rem; }
+            .lightbox-info { flex-direction: column; }
+            .lightbox-nav { width: 100%; justify-content: flex-end; }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .gallery-card { animation: fadeUp 0.45s ease both; }
+    </style>
+</head>
+
+<body>
+
+    <header class="gallery-header">
+        <div class="header-inner">
+            <a href="index.html" class="header-back">トップに戻る</a>
+            <span class="header-title">Nago Design Gallery</span>
+        </div>
+    </header>
+
+    <nav class="category-bar" role="tablist">
+        <button class="cat-tab" id="tab-phone"   onclick="switchCategory('phone')">SNS / Banner</button>
+        <button class="cat-tab" id="tab-poster"  onclick="switchCategory('poster')">Poster Design</button>
+        <button class="cat-tab" id="tab-website" onclick="switchCategory('website')">Web Design</button>
+    </nav>
+
+    <section class="gallery-hero">
+        <p class="hero-tag" id="hero-tag">Works</p>
+        <h1 class="hero-heading" id="hero-heading">Gallery</h1>
+        <p class="hero-desc" id="hero-desc">すべての作品をご覧いただけます。</p>
+    </section>
+
+    <main class="gallery-main">
+        <p class="gallery-count" id="gallery-count"><strong>0</strong> 件</p>
+        <div class="gallery-grid" id="gallery-grid"></div>
+    </main>
+
+    <footer class="gallery-footer">
+        <p>&copy; 2026 Nago Design with Cats. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true">
+        <button class="lightbox-close" id="lb-close" aria-label="閉じる">
+            <svg viewBox="0 0 24 24" width="18" height="18" stroke="#fff" stroke-width="2.5" stroke-linecap="round" fill="none">
+                <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+        </button>
+        <div class="lightbox-box">
+            <div class="lightbox-img-area">
+                <img src="" alt="" id="lb-img">
+            </div>
+            <div class="lightbox-info">
+                <div class="lightbox-text">
+                    <p class="lightbox-title" id="lb-title"></p>
+                    <p class="lightbox-desc"  id="lb-desc"></p>
+                </div>
+                <div class="lightbox-nav">
+                    <span class="lb-counter" id="lb-counter">1 / 1</span>
+                    <button class="lb-btn" id="lb-prev" aria-label="前の作品">
+                        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                    </button>
+                    <button class="lb-btn" id="lb-next" aria-label="次の作品">
+                        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    const slideData = {
+        phone: [
+            { img: 'assets/Banner_11.jpg', title: 'SNSバナー', desc: '「未経験」「便利屋」「独立」の3文字を強調し、素早くターゲットの目に止まることに重点を置いたデザインです。企業カラーのイエロー・オレンジをスタイリッシュな印象になるように使用いたしました。' },
+            { img: 'assets/Banner_03.jpg', title: 'ココナラ用サムネイル', desc: '和風で大人かわいいデザインをリクエストいただきました。心に迷いがある方の道しるべとなる姓名診断のサムネイルです！' },
+            { img: 'assets/Banner_06.jpg', title: 'SNSバナー', desc: 'アジアへの海外留学をPRするSNSバナーです。未来への希望感を右上がりの文字とグラデーションを付けた線、上を向く女性で表現しました。' },
+            { img: 'assets/Banner_01.jpg', title: '求人サイトバナー', desc: 'インパクトのある明るく元気な印象のバナー。ターゲットである20代女性の求める「アットホームなカジュアルさ」を立体的な文字とポップなイラストで表現しました。' },
+            { img: 'assets/Banner_04.jpg', title: '求人サイトバナー', desc: '新しいスタイルの警備の仕事との事で、マイナスイメージを払しょくする明るい印象をご希望でした。' },
+            { img: 'assets/Banner_05.jpg', title: '求人サイトバナー', desc: 'リクエストのピンク色をターゲットである40代女性に合わせ上品に使用いたしました。スマートフォンでかなり小さく表示されるので、可読性と情報の伝える順位にこだわりました。' },
+            { img: 'assets/Banner_07.jpg', title: 'WEBサイト用キャンペーンバナー', desc: '「冷房」「猛暑」「ダル重」と文字加工でイメージを乗せた要素と、一番目立たせたい「500ポイント還元」のバランスを赤色の背景でとりました。' },
+            { img: 'assets/Banner_08.jpg', title: 'メルマガ用ギフトバナー', desc: 'メルマガで配布するギフト券。「敬老の日」にマッサージを贈ることを訴求するバナーで、くすみカラーと柔らかいイラストで温かみのあるデザインにいたしました。' },
+            { img: 'assets/Banner_09.jpg', title: 'クーポンバナー', desc: '誕生月にサイト上に表示されるクーポンバナーです。ずらし文字とドット柄の背景でカジュアルな印象にいたしました。' },
+            { img: 'assets/Banner_10.jpg', title: 'ECサイト商品バナー', desc: 'シンプルで高級感のあるサイトの雰囲気に合わせたバナーのご希望でした。あしらいに中国風の印象を持たせたシンプルで落ち着いた品のあるデザインです。' },
+            { img: 'assets/Banner_02.jpg', title: 'ココナラバナー出品サムネイル', desc: 'ココナラでもお仕事募集中です！黒猫のイラストとイエローを目印に、ポスター・バナーを出品しております。' }
+        ],
+        poster: [
+            { img: 'assets/pos_1.jpg', title: 'M & kiki様店頭ポスター', desc: '美容サロンでヘナ染めを訴求する、立て看板用のB2サイズポスターです。ヘナのイメージに合わせたアジアンテイストのイラストと落ち着いたくすみカラーで、ナチュラルな印象に仕上げました。' },
+            { img: 'assets/pos_2.jpg', title: '美容クリニック店頭ポスター', desc: '新メニューのPRとキャンペーンを訴求するA2サイズポスターです。グラデーションと品のあるフォントで高級感のあるデザインにいたしました。' },
+            { img: 'assets/pos_3.jpg', title: 'ソフトクリームポップ', desc: '天然はちみつをかけたソフトクリーム用ポップ。六角形とはちのイラストではちみつの印象を強めつつ、落ち着いたトーンで統一感を持たせました。' },
+            { img: 'assets/pos_5.jpg', title: 'マンゴーフロートのポップ', desc: '店頭に掲示する、マンゴーフロート用ポップ。写真がすべて黄色になってしまい分かりにくいため、何が入っているかの説明を追加させていただきました。' },
+            { img: 'assets/pos_6.jpg', title: 'ラーメン店フライヤー兼チラシ', desc: '地元に愛されるラーメン店のフライヤー兼チラシ。コピーを3か所に分けて読みやすさを確保しつつ、内容に合わせフォントとカラーを変えています。' },
+            { img: 'assets/pos_7.jpg', title: 'ラーメン店フライヤー兼チラシ（カラー違い）', desc: '同デザインのオレンジカラー版。女性向けの雰囲気も持たせてほしいとの事で、やわらかい印象になるように調整いたしました。' },
+            { img: 'assets/pos_4.jpg', title: 'ラーメン店店頭ポスター', desc: '新規オープンのラーメン店の商品訴求ポスター。アップのラーメンの写真と大きな「鶏塩」の文字で遠目にも目立つインパクトを持たせました。' },
+            { img: 'assets/pos_8.jpg', title: 'おみやげ安河原様かき氷ポスター', desc: '店頭でのA3サイズポスターとA4サイズのメニュー表としても使用するデザイン。インバウンドの観光客にも分かりやすい設計にこだわりました。' },
+            { img: 'assets/pos_9.jpg', title: 'おみやげ安河原様マンゴー商品訴求ポスター', desc: 'A3サイズポスターとA4サイズメニュー表兼用デザイン。歩いて通る方が他店と比較しやすいようにデザインいたしました。' },
+            { img: 'assets/pos_10.jpg', title: 'アップルパイ専門店のオープン告知チラシ', desc: '温かみのある優しい印象のイラストと丸みのあるキャッチーなフォントで、できるだけ敷居の低い印象になるようにいたしました。' }
+        ],
+        website: [
+            { img: 'assets/co_1.jpg', title: 'MUGEN Studio様 - STUDIO', desc: 'オリジナルTシャツ制作専門店。スマートフォンからの利用を重視したワンパターンデザインです。' },
+            { img: 'assets/co_2.jpg', title: '菓子司和久良様 - コーポレートサイト', desc: '老舗和菓子店のコーポレートサイト。誠実さのあるシンプルで分かりやすい設計にいたしました。' },
+            { img: 'assets/co_3.jpg', title: 'YOGA FESTIVAL - STUDIO', desc: '架空イベントの期間限定特設サイト。季節に合わせた爽やかなオーガニックさのあるデザインにいたしました。' },
+            { img: 'assets/co_4.jpg', title: 'Visions - コーポレートサイト', desc: '「サスティナブルな未来」を意識した、無駄のないシンプルでおしゃれなデザインに仕上げました。' }
+        ]
+    };
+
+    const categoryMeta = {
+        phone:   { tag: 'SNS / Banner',  heading: 'BANNER WORKS',   desc: 'SNSバナー・サムネイルなどのデジタル広告デザイン作品一覧です。', gridClass: 'grid-phone'   },
+        poster:  { tag: 'Poster Design', heading: 'POSTER WORKS',   desc: 'フライヤー・チラシ・店頭ポスターなどの印刷物デザイン作品一覧です。', gridClass: 'grid-poster'  },
+        website: { tag: 'Web Design',    heading: 'WEB SITE WORKS', desc: 'コーポレートサイト・LPなどのWebサイトデザイン作品一覧です。', gridClass: 'grid-website' }
+    };
+
+    let currentCategory = 'phone';
+    let lbIndex = 0;
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(location.search);
+        const cat = params.get('category');
+        if (cat && slideData[cat]) currentCategory = cat;
+        switchCategory(currentCategory);
+
+        document.getElementById('lb-close').addEventListener('click', closeLightbox);
+        document.getElementById('lb-prev').addEventListener('click', () => lbNav(-1));
+        document.getElementById('lb-next').addEventListener('click', () => lbNav(1));
+        document.getElementById('lightbox').addEventListener('click', e => {
+            if (e.target === e.currentTarget) closeLightbox();
+        });
+        document.addEventListener('keydown', e => {
+            if (!document.getElementById('lightbox').classList.contains('open')) return;
+            if (e.key === 'Escape')      closeLightbox();
+            if (e.key === 'ArrowLeft')  lbNav(-1);
+            if (e.key === 'ArrowRight') lbNav(1);
+        });
+    });
+
+    function switchCategory(cat) {
+        currentCategory = cat;
+        const url = new URL(location.href);
+        url.searchParams.set('category', cat);
+        history.replaceState(null, '', url);
+
+        document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+        document.getElementById('tab-' + cat).classList.add('active');
+
+        const meta = categoryMeta[cat];
+        document.getElementById('hero-tag').textContent     = meta.tag;
+        document.getElementById('hero-heading').textContent = meta.heading;
+        document.getElementById('hero-desc').textContent    = meta.desc;
+
+        const grid = document.getElementById('gallery-grid');
+        grid.className = 'gallery-grid ' + meta.gridClass;
+
+        const items = slideData[cat];
+        document.getElementById('gallery-count').innerHTML = '<strong>' + items.length + '</strong> 件';
+
+        grid.innerHTML = items.map((item, i) => `
+            <article class="gallery-card" onclick="openLightbox(${i})" tabindex="0"
+                     role="button" aria-label="${item.title}"
+                     style="animation-delay:${i * 40}ms">
+                <div class="card-img-wrap">
+                    <img src="${item.img}" alt="${item.title}" loading="${i < 8 ? 'eager' : 'lazy'}">
+                    <div class="card-overlay">
+                        <div class="card-overlay-icon">
+                            <svg viewBox="0 0 24 24" width="16" height="16" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round">
+                                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-title">${item.title}</p>
+                    <p class="card-desc">${item.desc}</p>
+                </div>
+            </article>
+        `).join('');
+
+        grid.querySelectorAll('.gallery-card').forEach((card, i) => {
+            card.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(i); }
+            });
+        });
+    }
+
+    function openLightbox(index) {
+        lbIndex = index;
+        renderLightbox();
+        document.getElementById('lightbox').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    function lbNav(dir) {
+        const items = slideData[currentCategory];
+        lbIndex = (lbIndex + dir + items.length) % items.length;
+        renderLightbox();
+    }
+
+    function renderLightbox() {
+        const item = slideData[currentCategory][lbIndex];
+        const img = document.getElementById('lb-img');
+        img.style.opacity = '0';
+        img.src = item.img;
+        img.alt = item.title;
+        img.onload = () => { img.style.transition = 'opacity 0.2s'; img.style.opacity = '1'; };
+        document.getElementById('lb-title').textContent   = item.title;
+        document.getElementById('lb-desc').textContent    = item.desc;
+        document.getElementById('lb-counter').textContent =
+            (lbIndex + 1) + ' / ' + slideData[currentCategory].length;
+    }
+    </script>
+</body>
+
+</html>
