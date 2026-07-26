@@ -1,222 +1,1229 @@
-<!DOCTYPE html>
-<html lang="ja">
+/* ==========================================================================
+   Design System & Variable Declarations
+   ========================================================================== */
+:root {
+    --primary-color: #3a68a1;
+    --text-dark: #222222;
+    --text-muted: #666666;
+    --bg-light: #ffffff;
+    --bg-dark: #333;
+    --border-color: #e0e0e0;
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nago Design - Portfolio</title>
-    <!-- Google Fonts: Cormorant Garamond for Serif title & Outfit for Sans-serif body -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
+    /* Typography */
+    --font-serif: 'Cormorant Garamond', 'Noto Serif JP', serif;
+    --font-sans: 'Outfit', 'Noto Sans JP', sans-serif;
 
-<body>
+    /* Transitions */
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    --transition-carousel: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-    <!-- Sticky Navigation Bar -->
-    <!-- <header class="main-header">
-        <div class="header-container">
-            <div class="logo">
-                <img src="assets/Logo.png" alt="Nago Design" id="site-logo">
-            </div>
-            <nav class="nav-menu">
-                <ul>
-                    <li><a href="#hero">Top</a></li>
-                    <li><a href="#section1">Works</a></li>
-                    <li><a href="#section2">Poster</a></li>
-                    <li><a href="#section3">Web Design</a></li>
-                    <li><a href="#section4">Philosophy</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header> -->
+/* Reset and Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    box-sizing: border-box;
+}
 
-    <div class="page-wrapper">
+html {
+    scroll-behavior: smooth;
+    background-color: #212121;
+}
 
-        <!-- (1) First View (Hero) & Intro Combined Section -->
-        <section id="hero" class="hero-intro-combined">
-            <div class="hero-graphic">
-                <div class="hero-overlay-info" style="display:none;">
-                    <h1>GRAPHIC &amp; WEB Design</h1>
-                    <p>Nago Design WEB Designer Graphic Designer with Cats</p>
-                </div>
-            </div>
+body {
+    font-family: var(--font-sans);
+    color: var(--text-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
 
-            <!-- Intro White Banner Section inside Hero Section -->
-            <div id="intro" class="section-intro">
-                <div class="intro-overlay-info">
-                    <p class="ja-lead">あなたの想いを届けるためのデザインを</p>
-                    <p>ただ作ればいいわけじゃない。見栄えがいいだけじゃない。<br>
-                        伝えたい人の気持ちや誰かのためのこだわりを、向こう側の誰かまでちゃんと届ける。<br>
-                        人と人を繋ぐためにデザインはあるから。</p>
-                </div>
-            </div>
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
 
-            <!-- Rotating Round Text Overlay: RoundNago -->
-            <div class="round-text-overlay round-nago">
-                <img src="assets/RoundNago.png" alt="Nago Design circular text" class="rotating-circle">
-            </div>
-        </section>
+/* ==========================================================================
+   Sticky Header Layout & Glassmorphism
+   ========================================================================== */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: var(--transition-smooth);
+}
 
-        <!-- (2) Section 1: Smartphone Banner Section -->
-        <section id="section1" class="section-mockup section-phone">
-            <div class="mockup-bg-container" style="background-image: url('assets/sec1_bg.png');">
+.main-header.scrolled {
+    height: 65px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+}
 
-                <!-- Rotating Round Text Overlays -->
-                <!-- RoundBanner: positioned over the keyboard/glasses area (right side) -->
-                <div class="round-text-overlay round-banner">
-                    <img src="assets/RoundBanner.png" alt="Banner Designs circular text"
-                        class="rotating-circle rotating-circle--reverse">
-                    <img src="assets/mouse.png" alt="Mouse" class="mouse">
-                </div>
+.header-container {
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-                <!-- Phone Screen Carousel Overlay -->
-                <div class="carousel-container phone-screen-carousel">
-                    <div class="carousel-track-wrapper">
-                        <div class="carousel-track" id="phone-track">
-                            <!-- Slides will be inserted dynamically by JS -->
-                        </div>
-                    </div>
-                </div>
+.logo {
+    display: flex;
+    align-items: center;
+}
 
-                <!-- Phone Text Overlay (to hide static background text and show dynamic slide details) -->
-                <div class="phone-text-overlay" id="phone-details">
-                    <h3 class="slide-title">Loading...</h3>
-                    <p class="slide-desc"></p>
-                </div>
+.logo img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    transition: var(--transition-smooth);
+}
 
-                <!-- Custom Navigation Arrows for Phone -->
-                <div class="phone-buttons">
-                    <button class="carousel-arrow prev" onclick="moveCarousel('phone', -1)"
-                        aria-label="Previous slide">&#10094;</button>
-                    <a class="phone-all" href="gallery.html?category=phone">View All</a>
-                    <button class="carousel-arrow next" onclick="moveCarousel('phone', 1)"
-                        aria-label="Next slide">&#10095;</button>
-                </div>
+.main-header.scrolled .logo img {
+    height: 32px;
+}
 
-                <!-- Navigation Dots -->
-                <div class="carousel-dots" id="phone-dots"></div>
-            </div>
+.nav-menu ul {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+}
 
-            <!-- Mobile-only text panel: displayed below mockup on smartphones -->
-            <div class="phone-mobile-text" id="phone-mobile-details">
-                <h3 class="slide-title">Loading...</h3>
-                <p class="slide-desc"></p>
-            </div>
-        </section>
+.nav-menu a {
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    position: relative;
+    padding: 5px 0;
+}
 
-        <!-- (4) Section 2: Poster Design Section (Split Left-Right) -->
-        <section id="section2" class="section-split section-poster">
-            <h2 class="section-main-title">POSTER DESIGN</h2>
-            <!-- Left Info Pane -->
-            <div class="split-info-pane">
-                <div class="pane-content-wrapper">
-                    <div class="dynamic-slide-info" id="poster-details">
-                        <h3 class="slide-title">Loading Title...</h3>
-                        <p class="slide-desc">Loading description...</p>
-                    </div>
-                    <div class="section-cta-row">
-                        <span class="slide-counter" id="poster-counter">1 / 1</span>
-                        <a href="gallery.html?category=poster" class="view-all-btn">View All &#10095;</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Right Mockup Pane -->
-            <div class="split-mockup-pane" style="background-image: url('assets/sec2_bg.jpg');">
-                <!-- Billboard Screen Carousel Overlay -->
-                <div class="carousel-container poster-billboard-carousel">
-                    <div class="carousel-track-wrapper">
-                        <div class="carousel-track" id="poster-track">
-                            <!-- Slides will be inserted dynamically by JS -->
-                        </div>
-                    </div>
-                </div>
-                <div class="navigation-controls posterArrrow">
-                    <button class="arrow-btn prev" onclick="moveCarousel('poster', -1)"
-                        aria-label="Previous Poster">&#10094;</button>
-                    <button class="arrow-btn next" onclick="moveCarousel('poster', 1)"
-                        aria-label="Next Poster">&#10095;</button>
-                </div>
-            </div>
-        </section>
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: var(--transition-smooth);
+}
 
-        <!-- (5) Section 3: Web Site Design Section (Split Left-Right) -->
-        <section id="section3" class="section-split section-website">
-            <h2 class="section-main-title">WEB SITE DESIGN</h2>
-            <!-- Left Mockup Pane -->
-            <div class="split-mockup-pane" style="background-image: url('assets/sec3_bg.jpg');">
-                <!-- iMac Screen Carousel Overlay -->
-                <div class="carousel-container imac-screen-carousel">
-                    <div class="carousel-track-wrapper">
-                        <div class="carousel-track" id="website-track">
-                            <!-- Slides will be inserted dynamically by JS -->
-                        </div>
-                    </div>
-                </div>
-                <div class="navigation-controls webArrow">
-                    <button class="arrow-btn prev" onclick="moveCarousel('website', -1)"
-                        aria-label="Previous Website">&#8592;</button>
-                    <button class="arrow-btn next" onclick="moveCarousel('website', 1)"
-                        aria-label="Next Website">&#8594;</button>
-                </div>
-            </div>
-            <!-- Right Info Pane -->
-            <div class="split-info-pane">
-                <div class="pane-content-wrapper">
-                    <div class="dynamic-slide-info" id="website-details">
-                        <h3 class="slide-title">Loading Title...</h3>
-                        <p class="slide-desc">Loading description...</p>
-                        <a href="#" class="slide-url-btn" target="_blank" rel="noopener noreferrer">サイトを見る &#10095;</a>
-                    </div>
-                    <div class="section-cta-row">
-                        <span class="slide-counter" id="website-counter">1 / 1</span>
-                        <a href="gallery.html?category=website" class="view-all-btn">View All &#10095;</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+.nav-menu a:hover {
+    color: var(--text-dark);
+}
 
-        <!-- (6) Section 4: Dark Section (Split Left-Right) -->
-        <section id="section4" class="section-split section-philosophy">
-            <!-- Left Info Pane -->
-            <div class="split-info-pane">
-                <div class="pane-content-wrapper">
-                    <div class="section-title-tag">ATHER DESIGNS</div>
-                    <h2 class="section-main-title">PRODUCT DESIGN</h2>
-                    <div class="static-content">
-                        <h3>商品設計から伴走する</h3>
-                        <p>
-                            私たちのデザインは、単なる装飾ではありません。クライアントが心に描くビジョンや、伝えたいメッセージを深く理解し、視覚的なストーリーへと翻訳すること。それが私たちの役割です。
-                        </p>
-                        <p>
-                            使いやすさ（UI/UX）、色彩設計、タイポグラフィ、および猫のように自由でしなやかな発想力を組み合わせ、人々の心に残るプロダクトを生み出します。
-                        </p>
-                        <a href="https://nagodesign.studio.site" class="contact-cta">Get in Touch</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Right Dark Mockup Pane -->
-            <div class="split-mockup-pane" style="background-image: url('assets/sec4_bg.jpg');">
-                <!-- Solid dark grey aesthetic block with branding watermark -->
-                <div class="philosophy-watermark">
-                    <span class="watermark-text">Nago Design</span>
-                </div>
-            </div>
-        </section>
+.nav-menu a:hover::after {
+    width: 100%;
+}
 
-    </div>
+/* ==========================================================================
+   Page Wrapper
+   ========================================================================== */
+.page-wrapper {
+    /* margin: 80px auto 0 auto; */
+    margin: 0 auto;
+    max-width: 1600px;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    container-type: inline-size;
+}
 
-    <!-- Footer -->
-    <footer class="main-footer">
-        <div class="footer-container">
-            <p>&copy; 2026 Nago Design with Cats. All Rights Reserved.</p>
-        </div>
-    </footer>
+/* ==========================================================================
+   Section 1: Hero & Intro Combined Section
+   ========================================================================== */
+.hero-intro-combined {
+    width: 100%;
+    position: relative;
+    overflow: visible;
+    z-index: 1;
+    background-color: #ffffff;
+}
 
-    <script src="script.js"></script>
-</body>
+.hero-graphic {
+    width: 100%;
+    aspect-ratio: 1920 / 900;
+    background-image: url('assets/first_view.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
 
-</html>
+/* ==========================================================================
+   Section 2: Intro Section (Inside Hero Combined Section)
+   ========================================================================== */
+.section-intro {
+    width: min(1440px, 90%);
+    margin: 5rem auto 6rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.intro-overlay-info {
+    font-size: 1rem;
+    color: #222222;
+}
+
+.intro-overlay-info p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #333333;
+}
+
+.ja-lead {
+    font-size: 3rem;
+    margin: 0 0 1.5rem 0;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #111111;
+}
+
+/* ==========================================================================
+   Section 3: Mockup Container (Section 1 in Wireframe - Phone)
+   ========================================================================== */
+.section-phone {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1920 / 1400;
+    position: relative;
+    background-color: none;
+    container-type: size;
+    z-index: 2;
+    top: -6rem;
+}
+
+.mockup-bg-container {
+    width: 1600px;
+    height: auto;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    aspect-ratio: 401 / 226;
+}
+
+/* ==========================================================================
+   Rotating Round Text Overlays (RoundNago & RoundBanner)
+   ========================================================================== */
+
+/* Slow spin animation — clockwise */
+@keyframes spin-slow {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Counter-clockwise spin */
+@keyframes spin-slow-reverse {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+/* Wrapper: positions the circle at the correct spot in the mockup */
+.round-text-overlay {
+    position: absolute;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/*
+  RoundNago — placed inside #hero, upper right side.
+  Extends into section1 area behind section1 (due to z-index).
+*/
+.round-nago {
+    right: 2%;
+    bottom: -25%;
+    width: 50%;
+    z-index: 5;
+}
+
+/*
+  RoundBanner — placed inside section1 mockup-bg-container, left side.
+  Positioned below the mouse (left ~3%, top ~55%).
+*/
+.round-banner {
+    left: 3%;
+    top: 35%;
+    width: 28%;
+    z-index: 10;
+}
+
+.mouse {
+    position: absolute;
+    left: -6%;
+    top: 33%;
+    width: 86%;
+    z-index: 11;
+}
+
+/* The image itself rotates */
+.rotating-circle {
+    width: 100%;
+    height: auto;
+    display: block;
+    animation: spin-slow 18s linear infinite;
+    transform-origin: center center;
+}
+
+.rotating-circle--reverse {
+    animation: spin-slow-reverse 25s linear infinite;
+}
+
+/* --- Carousel Container Inside Smartphone Bezel ---
+   Detected Coordinates relative to 1920x900 background:
+   Left: 761px (39.6354%), Top: 187px (20.7778%), Width: 370px (19.2708%), Height: 300px (33.3333%)
+*/
+.phone-screen-carousel {
+    position: absolute;
+    left: 38%;
+    top: 28.6%;
+    width: 20.5%;
+    height: 34%;
+    z-index: 10;
+    overflow: hidden;
+}
+
+
+/* --- Smartphone Text Overlay Area ---
+   Hides static text pre-baked in the background and shows dynamic texts.
+   Left: 761px (39.6354%), Top: 487px (54.1111%), Width: 370px (19.2708%), Height: 200px (22.2222%)
+*/
+.phone-text-overlay {
+    position: absolute;
+    left: 38%;
+    top: 65%;
+    width: 20.4%;
+    height: 22.2222%;
+    z-index: 15;
+    background-color: #f2f2f4;
+    padding: 1rem 0.25rem 1rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
+.phone-text-overlay .slide-title {
+    font-size: clamp(1rem, 1.2vw, 1.5rem);
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 4px;
+    align-self: flex-start;
+}
+
+.phone-text-overlay .slide-desc {
+    font-size: clamp(0.75rem, 0.85vw, 1rem);
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Navigation controls for phone mockup */
+.section-phone .phone-buttons {
+    position: absolute;
+    bottom: 1.5%;
+    left: 39.6%;
+    z-index: 20;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 17%;
+    height: auto;
+    transition: var(--transition-smooth);
+    line-height: 1;
+    padding: 0;
+    /* text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6); */
+}
+
+.section-phone .carousel-arrow {
+    background: none;
+    border: none;
+    color: #ffffff;
+    /* font-size scales with the section-phone container height (aspect-ratio 1920/1400) */
+    font-size: clamp(20px, 5.5cqh, 52px);
+    cursor: pointer;
+}
+
+.section-phone .carousel-arrow:hover {
+    color: var(--border-color);
+}
+
+.section-phone .phone-all {
+    display: block;
+    background: var(--primary-color);
+    border: 2px solid var(--bg-light);
+    width: 60%;
+    padding: 0.6rem;
+    border-radius: 4px;
+    font-size: clamp(0.75rem, 1.8cqh, 28px);
+    font-family: var(--font-sans);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+    margin-top: 2.2%;
+    cursor: pointer;
+}
+
+.section-phone .phone-all:hover {
+    background: var(--border-color);
+    border: 2px solid var(--bg-light);
+    color: var(--primary-color);
+}
+
+.section-phone .carousel-dots {
+    position: absolute;
+    left: 48.5%;
+    transform: translateX(-50%);
+    bottom: 11%;
+    z-index: 20;
+    display: flex;
+    gap: 8px;
+}
+
+.section-phone .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #cccccc;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.section-phone .dot.active {
+    background-color: var(--primary-color);
+    width: 20px;
+    border-radius: 4px;
+}
+
+/* Mobile-only text panel below phone mockup (hidden on desktop/tablet) */
+.phone-mobile-text {
+    display: none;
+    padding: 20px 24px 28px;
+    background-color: #f2f2f4;
+    border-top: 3px solid var(--primary-color);
+}
+
+.phone-mobile-text .slide-title {
+    font-size: clamp(1rem, 4.5vw, 1.3rem);
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    letter-spacing: 0.03em;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 6px;
+    display: inline-block;
+}
+
+.phone-mobile-text .slide-desc {
+    font-size: clamp(0.8rem, 3.2vw, 0.92rem);
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ==========================================================================
+   Section 4 & 5: Split Grid Sections (Poster, Web Site, Philosophy)
+   ========================================================================== */
+.section-split {
+    width: 100%;
+    display: flex;
+    background-color: #ffffff;
+    position: relative;
+    margin: 20rem auto;
+}
+
+/* Left/Right Text Info Pane */
+.split-info-pane {
+    width: 31.25%;
+    /* 600px / 1920px */
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 60px;
+}
+
+.pane-content-wrapper {
+    max-width: 440px;
+    margin: 0 auto;
+}
+
+/* Left/Right Mockup Image Pane */
+.split-mockup-pane {
+    width: 68.75%;
+    /* 1320px / 1920px */
+    aspect-ratio: 1320 / 900;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* Typography styles for splits */
+.section-title-tag {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.section-main-title {
+    font-family: var(--font-sans);
+    font-size: clamp(3rem, 10.5cqw, 168px);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    letter-spacing: -0.02em;
+    position: absolute;
+    z-index: 10;
+    top: -6%;
+    left: 1rem;
+}
+
+#section3 .section-main-title {
+    right: 1rem;
+    left: auto;
+}
+
+/* Dynamic Slide Text Pane */
+.dynamic-slide-info {
+    margin-bottom: 40px;
+    min-height: 120px;
+}
+
+.dynamic-slide-info .slide-title {
+    font-size: clamp(1.2rem, 1.6vw, 1.8rem);
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+}
+
+.dynamic-slide-info .slide-desc {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* Split Section Controls */
+.navigation-controls {
+    display: flex;
+    justify-content: space-between;
+    z-index: 25;
+}
+
+.posterArrrow {
+    position: absolute;
+    width: 37%;
+    top: 45%;
+    left: 9%;
+}
+
+.webArrow {
+    position: absolute;
+    width: 50%;
+    top: 66%;
+    left: 40%;
+}
+
+.arrow-btn {
+    background: #e0e0e0c6;
+    border: 1px solid var(--text-muted);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 20px;
+    color: var(--text-dark);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+}
+
+.arrow-btn:hover {
+    background-color: var(--text-dark);
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+.slide-counter {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+}
+
+/* --- Section 2: Poster arrows — same style as Section 1 phone arrows --- */
+/* --- Section 3: Website arrows — keep background circle, thin chevron shape --- */
+.arrow-btn {
+    font-size: 0;
+    /* hide original text character */
+    overflow: visible;
+}
+
+.arrow-btn::before {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid currentColor;
+    border-left: 2px solid currentColor;
+    flex-shrink: 0;
+}
+
+.arrow-btn.prev::before {
+    transform: rotate(-45deg) translate(1px, 1px);
+}
+
+.arrow-btn.next::before {
+    transform: rotate(135deg) translate(1px, 1px);
+}
+
+/* --- Section 3: Website URL button --- */
+.slide-url-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 20px;
+    padding: 10px 22px;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    border-radius: 4px;
+    transition: var(--transition-smooth);
+    text-decoration: none;
+}
+
+.slide-url-btn:hover {
+    background-color: var(--text-dark);
+    transform: translateY(-2px);
+    color: #ffffff;
+}
+
+/* --- Section CTA row (counter + View All button) --- */
+.section-cta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 28px;
+    gap: 12px;
+}
+
+.view-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 22px;
+    background-color: transparent;
+    color: var(--primary-color);
+    font-size: clamp(0.85rem, 1.6cqh, 1.15rem);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    border-radius: 4px;
+    border: 2px solid var(--primary-color);
+    transition: var(--transition-smooth);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.view-all-btn:hover {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* --- Section 2 (Poster Billboard) Carousel Area ---
+   Coordinates relative to 1320x900 mockup pane:
+   Left: 166px (12.5758%), Top: 141px (15.6667%), Width: 400px (30.303%), Height: 579px (64.3333%)
+*/
+.poster-billboard-carousel {
+    position: absolute;
+    left: 12%;
+    top: 11.5%;
+    width: 31%;
+    height: 68.2%;
+    z-index: 20;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+/* --- Section 3 (iMac Screen) Carousel Area ---
+   Coordinates relative to 1320x900 mockup pane:
+   Left: 495px (37.5%), Top: 136px (15.1111%), Width: 727px (55.0758%), Height: 41.3333% (41.3333%)
+*/
+.imac-screen-carousel {
+    position: absolute;
+    left: 37%;
+    top: 12.5%;
+    width: 56%;
+    height: 46.5%;
+    z-index: 10;
+    overflow: hidden;
+    background-color: #000;
+}
+
+/* ==========================================================================
+   Carousel Core Styling
+   ========================================================================== */
+.carousel-track-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.carousel-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: var(--transition-carousel);
+}
+
+.carousel-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-slide img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    transform: translate(-50%, -50%);
+    display: block;
+}
+
+/* ==========================================================================
+   Section 4: Philosophy Static Content
+   ========================================================================== */
+.section-philosophy {
+    border-top: 1px solid var(--border-color);
+}
+
+.section-philosophy .split-mockup-pane {
+    aspect-ratio: 1320 / 893;
+}
+
+.static-content h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
+
+.static-content p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 25px;
+    line-height: 1.7;
+    text-align: justify;
+}
+
+.contact-cta {
+    display: inline-block;
+    padding: 14px 35px;
+    background-color: var(--text-dark);
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 30px;
+    transition: var(--transition-smooth);
+    margin-top: 15px;
+}
+
+.contact-cta:hover {
+    background-color: var(--primary-color);
+    box-shadow: 0 10px 25px rgba(58, 104, 161, 0.35);
+    transform: translateY(-2px);
+}
+
+.philosophy-watermark {
+    position: absolute;
+    bottom: 60px;
+    right: 60px;
+    opacity: 0.05;
+}
+
+.watermark-text {
+    font-family: var(--font-serif);
+    font-size: 5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    user-select: none;
+}
+
+/* ==========================================================================
+   Footer Styling
+   ========================================================================== */
+.main-footer {
+    background-color: #111111;
+    color: #888888;
+    padding: 40px 0;
+    border-top: 1px solid #222222;
+}
+
+.footer-container {
+    margin: 0 auto;
+    padding: 0 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-container p {
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+}
+
+/* ==========================================================================
+   Media Queries & Responsiveness
+   ========================================================================== */
+
+/* ------------------------------------------------------------------
+   ≥ 1920px: Fluid scale — everything stretches with viewport width
+   ------------------------------------------------------------------ */
+/* max-width: 1600px が設定されているため、≥1920px ブレークポイントは不要 */
+
+/* ------------------------------------------------------------------
+   1280px – 1919px: Default desktop design (unchanged from base)
+   ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+   640px – 1279px: Tablet layout
+   ------------------------------------------------------------------ */
+@media (max-width: 1279px) {
+
+    /* ---- Header ---- */
+    .main-header {
+        height: 68px;
+    }
+
+    .header-container {
+        padding: 0 32px;
+    }
+
+    .nav-menu ul {
+        gap: 24px;
+    }
+
+    .page-wrapper {
+        margin-top: 0;
+    }
+
+    /* ---- Intro ---- */
+    .section-intro {
+        width: min(100%, calc(100% - 4rem));
+        margin: 4rem auto 0;
+    }
+
+    .intro-overlay-info {
+        font-size: clamp(0.85rem, 1.5cqw, 1rem);
+    }
+
+    .ja-lead {
+        font-size: clamp(1.4rem, 3cqw, 2rem);
+        margin-bottom: 1.5rem;
+    }
+
+    /* ---- Section title (big decorative heading) ---- */
+    .section-main-title {
+        font-size: clamp(3.5rem, 8cqw, 134px);
+        top: -4.5%;
+    }
+
+    /* ---- Split sections: stack vertically ---- */
+    .section-split {
+        flex-direction: column;
+        margin: clamp(4rem, 8cqw, 12rem) auto;
+    }
+
+    .section-website {
+        flex-direction: column-reverse;
+    }
+
+    .split-info-pane {
+        width: 100%;
+        padding: 48px 40px;
+    }
+
+    .pane-content-wrapper {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .dynamic-slide-info {
+        margin-bottom: 20px;
+        min-height: auto;
+    }
+
+    .dynamic-slide-info .slide-title {
+        font-size: clamp(1.1rem, 2.2cqw, 1.6rem);
+    }
+
+    .dynamic-slide-info .slide-desc {
+        font-size: clamp(0.85rem, 1.5cqw, 1rem);
+    }
+
+    .navigation-controls {
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .split-mockup-pane {
+        width: 100%;
+        aspect-ratio: 1320 / 900;
+    }
+
+    /* ---- Phone mockup carousel ---- */
+    .section-phone {
+        aspect-ratio: 1920 / 1400;
+    }
+
+    .phone-screen-carousel {
+        left: 36.8%;
+        top: 27%;
+        width: 23.75%;
+        height: 34%;
+    }
+
+    .phone-text-overlay {
+        left: 36.8%;
+        top: 61%;
+        width: 23.75%;
+        padding: 0.75rem;
+    }
+
+    .phone-text-overlay .slide-title {
+        font-size: clamp(0.8rem, 1.5cqw, 1.2rem);
+        margin-bottom: 8px;
+    }
+
+    .phone-text-overlay .slide-desc {
+        font-size: clamp(0.65rem, 1.1cqw, 0.9rem);
+    }
+
+    .section-phone .carousel-arrow {
+        font-size: clamp(12px, 2.1cqh, 40px);
+    }
+
+    .section-phone .carousel-arrow.prev {
+        left: 33%;
+    }
+
+    .section-phone .carousel-arrow.next {
+        right: 36%;
+    }
+
+    .section-phone .carousel-dots {
+        bottom: 18%;
+    }
+
+    /* ---- Poster carousel (inside sec2_bg) ---- */
+    .poster-billboard-carousel {
+        left: 12.2%;
+        top: 11.5%;
+        width: 30.7%;
+        height: 60%;
+    }
+
+    .posterArrrow {
+        width: 28%;
+        top: 73%;
+        left: 14%;
+    }
+
+    /* ---- Website (iMac) carousel (inside sec3_bg) ---- */
+    .imac-screen-carousel {
+        left: 37%;
+        top: 12.5%;
+        width: 56%;
+        height: 46.5%;
+    }
+
+    .webArrow {
+        width: 52%;
+        top: 66%;
+        left: 38%;
+    }
+
+    /* ---- Philosophy section ---- */
+    .static-content h3 {
+        font-size: clamp(1.1rem, 2cqw, 1.4rem);
+    }
+
+    .static-content p {
+        font-size: clamp(0.85rem, 1.4cqw, 0.95rem);
+    }
+}
+
+/* ------------------------------------------------------------------
+   ≤ 639px: Smartphone layout
+   ------------------------------------------------------------------ */
+@media (max-width: 639px) {
+
+    /* ---- Header ---- */
+    .main-header {
+        position: relative;
+        height: 56px;
+    }
+
+    .header-container {
+        padding: 0 16px;
+    }
+
+    .logo img {
+        height: 26px;
+    }
+
+    .nav-menu {
+        display: none;
+    }
+
+    .page-wrapper {
+        margin-top: 0;
+    }
+
+    /* ---- Hero: make it taller on narrow screens ---- */
+    .section-hero {
+        aspect-ratio: auto;
+        height: 52vw;
+        min-height: 200px;
+    }
+
+    /* ---- Intro ---- */
+    .section-intro {
+        width: calc(100% - 2.5rem);
+        margin: 2.5rem auto 0;
+    }
+
+    .intro-overlay-info {
+        font-size: clamp(0.8rem, 3.2vw, 0.95rem);
+    }
+
+    .intro-overlay-info p {
+        text-align: justify;
+    }
+
+    .ja-lead {
+        font-size: clamp(1.2rem, 5vw, 1.6rem);
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    /* ---- Decorative section title ---- */
+    .section-main-title {
+        font-size: clamp(2rem, 9vw, 3.2rem);
+        top: -3.5%;
+        line-height: 1;
+        letter-spacing: -0.01em;
+    }
+
+    /* スマートフォンはvwが viewport基準なので変更しない */
+
+    /* ---- Split sections: single column ---- */
+    .section-split {
+        flex-direction: column;
+        margin: clamp(2.5rem, 6vw, 5rem) auto;
+    }
+
+    /* スマートフォンはvwがviewport基準のままで問題なし */
+
+    .section-website {
+        flex-direction: column-reverse;
+    }
+
+    .split-info-pane {
+        width: 100%;
+        padding: 32px 20px;
+    }
+
+    .pane-content-wrapper {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .dynamic-slide-info {
+        margin-bottom: 16px;
+        min-height: auto;
+    }
+
+    .dynamic-slide-info .slide-title {
+        font-size: clamp(1rem, 4.5vw, 1.3rem);
+        margin-bottom: 8px;
+    }
+
+    .dynamic-slide-info .slide-desc {
+        font-size: clamp(0.78rem, 3.2vw, 0.9rem);
+        line-height: 1.55;
+    }
+
+    /* ↑ スマートフォンはvwがviewport基準 (max-width: 639pxなのでそのまま) */
+
+    .slide-counter {
+        font-size: 0.8rem;
+    }
+
+    .navigation-controls {
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .arrow-btn {
+        width: 42px;
+        height: 42px;
+        font-size: 16px;
+    }
+
+    .split-mockup-pane {
+        width: 100%;
+        aspect-ratio: 1320 / 900;
+    }
+
+    /* ---- Phone mockup: reflow as block image + info below ---- */
+    .section-phone {
+        /* Keep aspect ratio so background image is visible */
+        aspect-ratio: 1920 / 1400;
+    }
+
+    .phone-screen-carousel {
+        /* Tighten coordinates for narrow viewport */
+        left: 36.2%;
+        top: 26%;
+        width: 24.5%;
+        height: 35%;
+    }
+
+    /* Hide the in-mockup text overlay on smartphones (too small to read) */
+    .phone-text-overlay {
+        display: none;
+    }
+
+    /* Show the dedicated mobile text panel below the mockup instead */
+    .phone-mobile-text {
+        display: block;
+    }
+
+    .section-phone .carousel-arrow {
+        font-size: clamp(14px, 2.1cqh, 22px);
+        width: auto;
+        height: auto;
+        padding: 0;
+    }
+
+    .section-phone .carousel-arrow.prev {
+        left: 27%;
+    }
+
+    .section-phone .carousel-arrow.next {
+        right: 29%;
+    }
+
+    .section-phone .carousel-dots {
+        bottom: 17%;
+        gap: 5px;
+    }
+
+    .section-phone .dot {
+        width: 6px;
+        height: 6px;
+    }
+
+    .section-phone .dot.active {
+        width: 14px;
+    }
+
+    /* ---- Poster carousel ---- */
+    .poster-billboard-carousel {
+        left: 12.2%;
+        top: 11.5%;
+        width: 30.7%;
+        height: 60%;
+    }
+
+    .posterArrrow {
+        width: 34%;
+        top: 72%;
+        left: 12%;
+    }
+
+    /* ---- iMac carousel ---- */
+    .imac-screen-carousel {
+        left: 37%;
+        top: 12.5%;
+        width: 56%;
+        height: 46.5%;
+    }
+
+    .webArrow {
+        width: 60%;
+        top: 65%;
+        left: 35%;
+    }
+
+    /* ---- Philosophy section ---- */
+    .section-philosophy .split-info-pane {
+        padding: 32px 20px;
+    }
+
+    .static-content h3 {
+        font-size: clamp(1rem, 4.5vw, 1.25rem);
+    }
+
+    .static-content p {
+        font-size: clamp(0.78rem, 3.2vw, 0.9rem);
+        margin-bottom: 18px;
+    }
+
+    .contact-cta {
+        padding: 12px 28px;
+        font-size: 0.82rem;
+    }
+
+    .section-title-tag {
+        font-size: 0.75rem;
+    }
+
+    /* ---- Footer ---- */
+    .footer-container {
+        padding: 0 20px;
+    }
+
+    .footer-container p {
+        font-size: 0.75rem;
+        text-align: center;
+    }
+}
